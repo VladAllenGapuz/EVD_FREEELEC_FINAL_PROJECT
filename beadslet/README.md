@@ -16,3 +16,5 @@ then update the path in `index.html` (images, team) or in the `CATALOG` list in 
 
 ## Run
 Open the folder in VS Code and use Live Server, or run `python -m http.server` and visit `localhost:8000`.
+
+test commit
