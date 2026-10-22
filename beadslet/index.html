@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="BeadsLET: affordable, customizable handmade bead bracelets.">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<title>BeadsLET | Bracelet and Beads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+<script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><nav>
+  <a class="logo" href="#top"><img src="assets/images/logo.svg" alt="" width="34" height="34"><span>BeadsLET</span></a>
+  <div class="links"><a class="l" href="#shop">Shop</a><a class="l" href="#build">Build yours</a><a class="l" href="#how">How it works</a><a class="l" href="#faq">FAQ</a>
+  <a class="cartbtn" href="#order">Cart (<span id="cart-count">0</span>)</a></div>
+</nav></div></header>
+
+<main id="top" class="wrap">
+<div class="hero">
+  <div>
+    <h1>Where tiny things carry great meaning</h1>
+    <p class="lead">Handmade bead bracelets with your name, your colors and your charms. Made to order, priced for students.</p>
+    <div class="cta"><a class="btn" href="#build">Design your bracelet</a><a class="btn ghost" href="#shop">Shop ready-made</a></div>
+  </div>
+  <div class="strand big" aria-hidden="true" id="hero-strand"></div>
+</div>
+
+<div class="stats" aria-label="Survey results">
+  <div class="stat"><b>76.7%</b><span>of 30 surveyed students have bought a bead bracelet before</span></div>
+  <div class="stat"><b>63.3%</b><span>would pay more for a personalized bracelet</span></div>
+  <div class="stat"><b>₱50–74</b><span>the most preferred price range</span></div>
+</div>
+
+<section id="about">
+  <div class="about">
+    <figure class="photo"><img src="assets/images/about.svg" alt="BeadsLET products on a table" loading="lazy"></figure>
+    <div>
+      <h2>Small beads, personal meaning</h2>
+      <p class="sub">BeadsLET (Beads + the last three letters of "bracelet") is a student-run business that turns beads, charms and letter pieces into affordable, customizable bracelets. Every piece is made to order, so each one is about the person who wears it.</p>
+      <a class="btn ghost" href="#build">Make yours</a>
+    </div>
+  </div>
+  <div class="gallery">
+    <figure class="photo"><img src="assets/images/gallery-1.svg" alt="Gallery photo 1" loading="lazy"></figure>
+    <figure class="photo"><img src="assets/images/gallery-2.svg" alt="Gallery photo 2" loading="lazy"></figure>
+    <figure class="photo"><img src="assets/images/gallery-3.svg" alt="Gallery photo 3" loading="lazy"></figure>
+  </div>
+</section>
+
+<section id="shop">
+  <h2>Ready-made collection</h2>
+  <p class="sub">Pick a favorite and add it to your cart. Want it with your name? Use the builder below.</p>
+  <div class="filters" id="filters">
+    <button class="filter on" data-tag="all">All</button><button class="filter" data-tag="minimalist">Minimalist</button>
+    <button class="filter" data-tag="couple">Couple</button><button class="filter" data-tag="friendship">Friendship</button><button class="filter" data-tag="charm">Charm</button>
+  </div>
+  <div class="grid" id="catalog"></div>
+</section>
+
+<section id="build">
+  <h2>Build your own</h2>
+  <p class="sub">Type a name, pick colors and charms, and watch the price update.</p>
+  <div class="split">
+    <div class="card">
+      <label for="name" style="margin-top:0">Name or word (up to 10 letters)</label>
+      <input type="text" id="name" maxlength="10" placeholder="e.g. ALLEN" autocomplete="off">
+      <label>Bead color</label>
+      <div class="swatches">
+        <button class="swatch on" data-color="#d98ba6" style="background:#d98ba6" aria-label="Rose"></button>
+        <button class="swatch" data-color="#8fb8a8" style="background:#8fb8a8" aria-label="Sage"></button>
+        <button class="swatch" data-color="#7d9bd8" style="background:#7d9bd8" aria-label="Sky"></button>
+        <button class="swatch" data-color="#b79bf0" style="background:#b79bf0" aria-label="Lilac"></button>
+        <button class="swatch" data-color="#f1d98a" style="background:#f1d98a" aria-label="Butter"></button>
+        <button class="swatch" data-color="#3a3350" style="background:#3a3350" aria-label="Midnight"></button>
+      </div>
+      <label for="bead">Bead type</label>
+      <select id="bead"><option value="Acrylic">Acrylic (base)</option><option value="Mixed">Mixed beads (+₱5)</option><option value="Pearl-like">Pearl-like (+₱10)</option><option value="Gemstone-style">Gemstone-style (+₱15)</option></select>
+      
+      <label>Charms (+₱10 each) & Placement</label>
+      <div class="charm-options">
+        <div class="charm-item">
+          <label><input type="checkbox" class="charm" value="♥"> Heart (♥)</label>
+          <select class="charm-pos" data-charm="♥">
+            <option value="left">Left</option>
+            <option value="center" selected>Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+        <div class="charm-item">
+          <label><input type="checkbox" class="charm" value="★"> Star (★)</label>
+          <select class="charm-pos" data-charm="★">
+            <option value="left">Left</option>
+            <option value="center" selected>Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+        <div class="charm-item">
+          <label><input type="checkbox" class="charm" value="☾"> Moon (☾)</label>
+          <select class="charm-pos" data-charm="☾">
+            <option value="left">Left</option>
+            <option value="center" selected>Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="qty">Quantity</label>
+      <input type="number" id="qty" min="1" max="50" value="1">
+    </div>
+    <div class="card">
+      <h3>Live preview</h3>
+      <div class="strand" id="preview"></div>
+      <p class="muted" id="summary"></p>
+      <div class="price" id="price">₱50</div>
+      <p class="muted">Add 3 or more bracelets to your cart for 10% off.</p>
+      <button class="btn" id="add">Add to cart</button>
+      <div class="msg" id="build-msg" role="status"></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Design</b>Build your own or pick from the collection.</li>
+    <li><b>Order</b>Check your cart and send us your details.</li>
+    <li><b>We craft it</b>Every bracelet is strung by hand after you order.</li>
+    <li><b>Get it</b>Pick up at a school booth, meet the seller, or choose delivery.</li>
+  </ol>
+</section>
+
+<section id="order">
+  <h2>Cart and checkout</h2>
+  <div class="split">
+    <div class="card">
+      <ul id="cart-list"></ul>
+      <div class="totals" id="totals"></div>
+      <p><button class="btn ghost" id="clear" type="button">Clear cart</button></p>
+    </div>
+    <form class="card" id="order-form" novalidate>
+      <label for="cust" style="margin-top:0">Your name</label><input type="text" id="cust" autocomplete="name"><span class="err" id="e-cust"></span>
+      <label for="contact">Mobile number or email</label><input type="text" id="contact" autocomplete="off"><span class="err" id="e-contact"></span>
+      <label for="method">Get it by</label>
+      <select id="method"><option value="0">School booth pickup (free)</option><option value="0">Meet up with seller (free)</option><option value="30">Delivery (+₱30)</option></select>
+      <label for="note">Gift note (optional)</label><input type="text" id="note" maxlength="60">
+      <p><button class="btn" type="submit">Place order</button></p>
+      <div class="msg" id="order-msg" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions</h2>
+  <details><summary>How long does an order take?</summary><p>Bracelets are made to order. We confirm the timeline with you after you place your order.</p></details>
+  <details><summary>Can I order matching bracelets for a group?</summary><p>Yes. Set the quantity in the builder, or pick the couple and friendship sets.</p></details>
+  <details><summary>How do I pay?</summary><p>Payment is arranged with the seller when you get your order.</p></details>
+</section>
+<section id="team">
+  <h2>Meet the team</h2>
+  <p class="sub">BSIT 3 Section 10, Cebu Eastern College.</p>
+  <div class="team">
+    <div class="member"><img src="assets/team/member-1.svg" alt="Photo of Semblante, Bonn Clark L." loading="lazy"><b>Semblante, Bonn Clark L.</b><span>Role: add here</span></div>
+    <div class="member"><img src="assets/team/member-2.svg" alt="Photo of Sefuentes, Nadia Katrina L." loading="lazy"><b>Sefuentes, Nadia Katrina L.</b><span>Role: add here</span></div>
+    <div class="member"><img src="assets/team/member-3.svg" alt="Photo of Gapuz, Vladd Allen" loading="lazy"><b>Gapuz, Vladd Allen</b><span>Role: add here</span></div>
+    <div class="member"><img src="assets/team/member-4.svg" alt="Photo of Azur, John Leumark" loading="lazy"><b>Azur, John Leumark</b><span>Role: add here</span></div>
+    <div class="member"><img src="assets/team/member-5.svg" alt="Photo of Astillero, Juvy" loading="lazy"><b>Astillero, Juvy</b><span>Role: add here</span></div>
+    <div class="member"><img src="assets/team/member-6.svg" alt="Photo of Dacua, Hazel Marie" loading="lazy"><b>Dacua, Hazel Marie</b><span>Role: add here</span></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><b>BeadsLET: Bracelet and Beads</b><br>Semblante, Sefuentes, Gapuz, Azur, Astillero, Dacua<br>BSIT 3 Section 10, Cebu Eastern College. Event-Driven Programming Final Project.</div></footer>
+<div id="toast" role="status"></div>
+<script type="py" src="./main.py"></script>
+</body>
+</html>
