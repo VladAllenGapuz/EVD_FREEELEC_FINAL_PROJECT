@@ -8,6 +8,7 @@ Event-Driven Programming final project (PyScript).
 - `assets/images/` : logo.svg, favicon.svg, about.svg, gallery-1..3.svg
 - `assets/products/` : product-1..6.svg (one per catalog item)
 - `assets/team/` : member-1..6.svg
+- `assets/team/` : member-1..6.svg
 
 ## Replacing placeholders
 Save your real photo with the same name (e.g. `assets/products/product-1.svg` -> `product-1.jpg`),
