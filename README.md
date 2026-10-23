@@ -9,11 +9,7 @@ Event-Driven Programming final project (PyScript).
 - `assets/products/` : product-1..6.svg (one per catalog item)
 - `assets/team/` : member-1..6.svg
 - `assets/team/` : member-1..6.svg
-
-## Replacing placeholders
-Save your real photo with the same name (e.g. `assets/products/product-1.svg` -> `product-1.jpg`),
-then update the path in `index.html` (images, team) or in the `CATALOG` list in `main.py` (products).
-
+- 
 ## Run
 Open the folder in VS Code and use Live Server, or run `python -m http.server` and visit `localhost:8000`.
 
