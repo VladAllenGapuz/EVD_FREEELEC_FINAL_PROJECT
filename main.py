@@ -25,6 +25,14 @@ def peso(n): return f"₱{n:,.0f}"
 def esc(s): return html.escape(str(s))
 
 
+def data(node, key):
+    """Safely read a data-* attribute. Returns None if missing."""
+    try:
+        return node.getAttribute(f"data-{key}")
+    except Exception:
+        return None
+
+
 # If the page still has the old charm section, turn it into the new charm builder.
 _old = document.querySelector(".charm-options")
 if _old is not None and _old.id != "charm-options":
@@ -118,16 +126,18 @@ def render_catalog():
 
 @when("click", "#filters")
 def on_filter(event):
-    if tag := event.target.dataset.tag:
+    tag = data(event.target, "tag")
+    if tag:
         state["tag"] = tag
         for f in document.querySelectorAll(".filter"):
-            f.classList.toggle("on", f.dataset.tag == tag)
+            f.classList.toggle("on", data(f, "tag") == tag)
         render_catalog()
 
 
 @when("click", "#catalog")
 def on_catalog(event):
-    if pid := event.target.dataset.id:
+    pid = data(event.target, "id")
+    if pid:
         p = next(x for x in CATALOG if x["id"] == int(pid))
         add_item(p["title"], p["desc"], p["unit"], 1, p["colors"][0])
         asyncio.ensure_future(toast(f'{p["title"]} added to cart'))
@@ -267,8 +277,9 @@ def on_bead(event): refresh_preview()
 @when("click", "#charm-options")
 def on_charm_click(event):
     t = event.target
-    act, sym = t.dataset.act, t.dataset.sym
-    if not act or not sym: return
+    act, sym = data(t, "act"), data(t, "sym")
+    if not act or not sym:
+        return
     lst = state["charms"][sym]
     if act == "inc" and len(lst) < MAX_EACH:
         lst.append(str(len(clean_name() or "BEADS") // 2))
@@ -280,15 +291,16 @@ def on_charm_click(event):
 @when("change", "#charm-options")
 def on_charm_pos(event):
     t = event.target
-    if t.dataset.sym:
-        state["charms"][t.dataset.sym][int(t.dataset.k)] = t.value
+    sym, k = data(t, "sym"), data(t, "k")
+    if sym and k is not None:
+        state["charms"][sym][int(k)] = t.value
         refresh_preview()
 
 
 @when("click", ".swatches")
 def on_swatch(event):
     if event.target.classList.contains("swatch"):
-        state["color"] = event.target.dataset.color
+        state["color"] = data(event.target, "color")
         for s in document.querySelectorAll(".swatch"):
             s.classList.toggle("on", s is event.target)
         refresh_preview()
@@ -311,8 +323,9 @@ def on_add(event):
 # ---------- Cart Actions & Checkout ----------
 @when("click", "#cart-list")
 def on_cart(event):
-    if (act := event.target.dataset.act) is not None:
-        i = int(event.target.dataset.i)
+    act = data(event.target, "act")
+    if act:
+        i = int(data(event.target, "i"))
         if act == "inc": state["cart"][i]["qty"] += 1
         elif act == "dec": state["cart"][i]["qty"] = max(1, state["cart"][i]["qty"] - 1)
         elif act == "rm": state["cart"].pop(i)
